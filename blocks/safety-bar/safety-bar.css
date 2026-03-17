@@ -1,0 +1,170 @@
+/* Safety Bar - fixed ISI bar at bottom of viewport */
+
+.safety-bar-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  margin: 0;
+  padding: 0;
+}
+
+main > .section.safety-bar-container {
+  margin: 0;
+  padding: 0;
+}
+
+main > .section.safety-bar-container > div {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.safety-bar {
+  background-color: var(--dark-color, #131313);
+  color: var(--text-light, #fff);
+  font-family: var(--body-font-family);
+}
+
+/* Override global link/button chevron ::after */
+.safety-bar a::after,
+.safety-bar button::after {
+  content: none;
+  display: none;
+}
+
+/* Header row with title and toggle */
+.safety-bar .safety-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px;
+  border-bottom: 1px solid rgba(255 255 255 / 20%);
+}
+
+.safety-bar .safety-bar-title {
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-xs, 17px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Toggle button */
+.safety-bar .safety-bar-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light, #fff);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.safety-bar .safety-bar-toggle:hover {
+  background-color: rgba(255 255 255 / 15%);
+  text-decoration: none;
+}
+
+.safety-bar .safety-bar-toggle:focus {
+  outline: 2px solid var(--main-accent-color, #fb923c);
+  outline-offset: 2px;
+}
+
+/* Chevron icon via CSS borders */
+.safety-bar .safety-bar-icon {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: solid currentcolor;
+  border-width: 2px 2px 0 0;
+  transform: rotate(135deg);
+  transition: transform 0.3s ease;
+}
+
+/* Chevron points up when expanded */
+.safety-bar .safety-bar-toggle[aria-expanded="true"] .safety-bar-icon {
+  transform: rotate(-45deg);
+}
+
+/* Collapsed content */
+.safety-bar .safety-bar-collapsed {
+  padding: 8px 24px 12px;
+  font-size: var(--body-font-size-xs, 17px);
+  line-height: 1.4;
+}
+
+.safety-bar .safety-bar-collapsed[hidden] {
+  display: none;
+}
+
+.safety-bar .safety-bar-collapsed p {
+  margin: 0 0 0.2em;
+}
+
+.safety-bar .safety-bar-collapsed ul {
+  margin: 0.2em 0;
+  padding-left: 15px;
+}
+
+/* Expanded content - scrollable */
+.safety-bar .safety-bar-expanded {
+  max-height: 50vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 12px 24px 16px;
+  font-size: var(--body-font-size-xs, 17px);
+  line-height: 1.5;
+}
+
+.safety-bar .safety-bar-expanded[hidden] {
+  display: none;
+}
+
+.safety-bar .safety-bar-expanded p {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+.safety-bar .safety-bar-expanded ul {
+  padding-left: 15px;
+}
+
+/* Scrollbar styling */
+.safety-bar .safety-bar-expanded::-webkit-scrollbar {
+  width: 6px;
+}
+
+.safety-bar .safety-bar-expanded::-webkit-scrollbar-track {
+  background: rgba(255 255 255 / 10%);
+}
+
+.safety-bar .safety-bar-expanded::-webkit-scrollbar-thumb {
+  background-color: rgba(255 255 255 / 30%);
+  border-radius: 3px;
+}
+
+/* Responsive */
+@media (width < 768px) {
+  .safety-bar .safety-bar-header {
+    padding: 8px 16px;
+  }
+
+  .safety-bar .safety-bar-collapsed,
+  .safety-bar .safety-bar-expanded {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .safety-bar .safety-bar-expanded {
+    max-height: 40vh;
+  }
+
+  .safety-bar .safety-bar-title {
+    font-size: 14px;
+  }
+}

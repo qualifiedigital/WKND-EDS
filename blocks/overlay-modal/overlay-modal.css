@@ -1,0 +1,165 @@
+/* Overlay Modal - full-page modal with optional forced behavior */
+
+/* Body scroll lock when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Overlay backdrop */
+.overlay-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0 0 0 / 0%);
+  transition: background 0.3s ease;
+  padding: 24px;
+}
+
+.overlay-modal-overlay[hidden] {
+  display: none;
+}
+
+.overlay-modal-overlay.open {
+  background: rgba(0 0 0 / 60%);
+}
+
+/* Dialog panel */
+.overlay-modal-dialog {
+  position: relative;
+  background: var(--background-color, #fff);
+  border-radius: var(--border-radius-medium, 0.5rem);
+  max-width: 700px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0 0 0 / 30%);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.overlay-modal-overlay.open .overlay-modal-dialog {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Close button */
+.overlay-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  padding: 0;
+  color: var(--text-color, #131313);
+}
+
+/* Override global button ::after chevron */
+.overlay-modal-close::after {
+  content: none;
+  display: none;
+}
+
+.overlay-modal-close:hover {
+  background-color: var(--light-color, #dcdcdc);
+  text-decoration: none;
+}
+
+.overlay-modal-close:focus {
+  outline: 2px solid var(--main-accent-color, #fb923c);
+  outline-offset: 2px;
+}
+
+.overlay-modal-close-icon {
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+/* Modal body - scrollable content */
+.overlay-modal-body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 32px;
+  flex: 1;
+  font-size: var(--body-font-size-s, 19px);
+  line-height: 1.6;
+  color: var(--text-color, #131313);
+}
+
+.overlay-modal-body p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.overlay-modal-body ul {
+  padding-left: 15px;
+}
+
+/* Override global link ::after chevron inside modal */
+.overlay-modal-body a::after {
+  content: none;
+  display: none;
+}
+
+/* Override global picture hover shine effect inside modal */
+.overlay-modal-body picture::before {
+  display: none;
+}
+
+/* Scrollbar styling */
+.overlay-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overlay-modal-body::-webkit-scrollbar-track {
+  background: var(--light-color, #f0f0f0);
+}
+
+.overlay-modal-body::-webkit-scrollbar-thumb {
+  background-color: rgba(0 0 0 / 20%);
+  border-radius: 3px;
+}
+
+/* Responsive */
+@media (width < 768px) {
+  .overlay-modal-overlay {
+    padding: 16px;
+  }
+
+  .overlay-modal-dialog {
+    max-height: 90vh;
+    border-radius: var(--border-radius-base, 0.25rem);
+  }
+
+  .overlay-modal-body {
+    padding: 24px 16px;
+  }
+}
+
+@media (width < 480px) {
+  .overlay-modal-overlay {
+    padding: 8px;
+  }
+
+  .overlay-modal-dialog {
+    max-height: 95vh;
+  }
+
+  .overlay-modal-body {
+    padding: 20px 12px;
+  }
+}
