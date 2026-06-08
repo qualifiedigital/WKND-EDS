@@ -47,17 +47,13 @@
             "superscript",
             "subscript"
           ],
-          "editor": [
-            "removeformat"
-          ],
           "sections": [
             "format",
             "alignment",
             "indentation",
             "list",
             "insert",
-            "sr_script",
-            "editor"
+            "sr_script"
           ]
         }
       }
