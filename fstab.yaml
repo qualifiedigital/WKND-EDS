@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p105570-e988731.adobeaemcloud.com/bin/franklin.delivery/qualifiedigital/wknd-universal/main"
+    url: "https://author-p105570-e988731.adobeaemcloud.com/bin/franklin.delivery/qualifiedigital/WKND-EDS/main"
     type: "markup"
     suffix: ".html"
