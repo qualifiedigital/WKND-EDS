@@ -45,9 +45,12 @@
       "dm-asset",
       "dm-template",
       "image",
-      "text",      
+      "text",
       "title",
       "video"
     ]
+  },
+  {
+  "...": "./_text.json#/filters"
   }
 ]

@@ -49,5 +49,49 @@
       "title",
       "video"
     ]
+  },
+  {
+    "id": "text",
+    "rte": {
+      "toolbar": {
+        "format": [
+          "bold",
+          "italic",
+          "underline",
+          "strike"
+        ],
+        "alignment": [
+          "left",
+          "center",
+          "right",
+          "justify"
+        ],
+        "indentation": [
+          "indent",
+          "outdent"
+        ],
+        "list": [
+          "bullet_list",
+          "ordered_list"
+        ],
+        "insert": [
+          "image",
+          "table",
+          "special_characters"
+        ],
+        "sr_script": [
+          "superscript",
+          "subscript"
+        ],
+        "sections": [
+          "format",
+          "alignment",
+          "indentation",
+          "list",
+          "insert",
+          "sr_script"
+        ]
+      }
+    }
   }
 ]
