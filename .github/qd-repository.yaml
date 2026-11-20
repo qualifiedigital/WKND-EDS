@@ -1,0 +1,453 @@
+apiVersion: qd.dev/v2
+schemaVersion: '2.7'
+kind: Repository
+metadata: {name: WKND-EDS, description: null, owner: null, client: null}
+spec:
+  repository: {visibility: unknown, layout: single-project}
+  projects:
+  - id: wknd-eds
+    path: .
+    kind: website
+    languages:
+    - id: javascript
+      evidence: [scripts/scripts.js]
+    - id: css
+      evidence: [styles/styles.css]
+    frameworks:
+    - id: aem-eds
+      evidence: [scripts/aem.js]
+    buildTools:
+    - id: npm
+      evidence: [package.json, package-lock.json]
+    integrations: []
+    discovery:
+      enabled: true
+      roots:
+      - {path: blocks/, role: components}
+      - {path: scripts/, role: source}
+      - {path: styles/, role: assets}
+      exclude: [.git/, node_modules/, dist/]
+    quality:
+      testFrameworks: []
+      lintTools:
+      - id: eslint
+        evidence: [.eslintrc.js]
+      - id: stylelint
+        evidence: [.stylelintrc.json]
+      validationCommands:
+      - {purpose: lint, command: npm run lint, definedIn: package.json}
+      ciWorkflows: []
+    extensions:
+      aem:
+        platform: aem-edge-delivery
+        authoring: {model: aem-xwalk, editor: universal-editor}
+    inventory:
+      coverage:
+        status: complete
+        profiles: [eds-blocks-v1]
+        roots:
+        - {path: blocks/, status: scanned, reason: null}
+        - {path: scripts/, status: scanned, reason: null}
+        - {path: styles/, status: scanned, reason: null}
+        issues: []
+      sources:
+        component-definition: component-definition.json
+        component-filters: component-filters.json
+        component-models: component-models.json
+      notices:
+        target-validation-not-run: Source was inspected statically; runtime behavior and target compatibility were not validated.
+        variants-not-enumerated: Block CSS and authoring selects were not read in full; selectable variants were not enumerated and omitted variants
+          do not mean none exist.
+        dependencies-static-imports-only: Dependencies come from relative static/dynamic JS imports; CSS dependencies, convention-based loading
+          (aem.js block loader) and runtime services were not traced.
+      assets:
+      - id: block-accordion-172d17fe
+        type: block
+        path: blocks/accordion/
+        name: accordion
+        files:
+          configuration: [blocks/accordion/_accordion.json]
+          style: [blocks/accordion/accordion.css]
+          implementation: [blocks/accordion/accordion.js]
+        status: partial
+        entryPoints: [blocks/accordion/accordion.js]
+        authoring:
+          status: known
+          bindings:
+          - id: ue-accordion
+            status: resolved
+            definition: '@component-definition#/groups/2/components/5'
+            filters: ['@component-filters#/2']
+          - {id: ue-accordion-item, status: resolved, definition: '@component-definition#/groups/2/components/6', modelId: accordion-item, model: '@component-models#/49'}
+        dependencies:
+          internal:
+          - {path: scripts/scripts.js, resolution: resolved, relation: import, need: required, evidence: [blocks/accordion/accordion.js]}
+      - id: block-action-button-6dd0d264
+        type: block
+        path: blocks/action-button/
+        name: action-button
+        files:
+          style: [blocks/action-button/action-button.css]
+          implementation: [blocks/action-button/action-button.js]
+        status: partial
+        entryPoints: [blocks/action-button/action-button.js]
+        authoring: {status: unknown}
+        dependencies:
+          internal:
+          - {path: scripts/dom-helpers.js, resolution: resolved, relation: import, need: required, evidence: [blocks/action-button/action-button.js]}
+      - id: block-cards-a024922d
+        type: block
+        path: blocks/cards/
+        name: cards
+        files:
+          configuration: [blocks/cards/_cards.json]
+          implementation: [blocks/cards/_default.html, blocks/cards/cards.js]
+          style: [blocks/cards/cards.css]
+        status: partial
+        entryPoints: [blocks/cards/cards.js]
+        authoring:
+          status: known
+          bindings:
+          - id: ue-cards
+            status: resolved
+            definition: '@component-definition#/groups/2/components/0'
+            filters: ['@component-filters#/3']
+          - {id: ue-card, status: resolved, definition: '@component-definition#/groups/2/components/1', modelId: card, model: '@component-models#/5'}
+        dependencies:
+          internal:
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/cards/cards.js]}
+          - {path: scripts/blockTemplate.js, resolution: resolved, relation: import, need: required, evidence: [blocks/cards/cards.js]}
+          - {path: scripts/scripts.js, resolution: resolved, relation: import, need: required, evidence: [blocks/cards/cards.js]}
+      - id: block-carousel-a2488b3b
+        type: block
+        path: blocks/carousel/
+        name: carousel
+        files:
+          configuration: [blocks/carousel/_carousel.json]
+          style: [blocks/carousel/carousel.css]
+          implementation: [blocks/carousel/carousel.js]
+        status: partial
+        entryPoints: [blocks/carousel/carousel.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-carousel, status: resolved, definition: '@component-definition#/groups/2/components/12', modelId: carousel, model: '@component-models#/13',
+            filters: ['@component-filters#/4']}
+        dependencies:
+          internal:
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/carousel/carousel.js]}
+          - {path: scripts/scripts.js, resolution: resolved, relation: import, need: required, evidence: [blocks/carousel/carousel.js]}
+          - {path: scripts/slider.js, resolution: resolved, relation: import, need: required, evidence: [blocks/carousel/carousel.js]}
+      - id: block-columns-45eba850
+        type: block
+        path: blocks/columns/
+        name: columns
+        files:
+          configuration: [blocks/columns/_columns.json]
+          style: [blocks/columns/columns.css]
+          implementation: [blocks/columns/columns.js]
+        status: partial
+        entryPoints: [blocks/columns/columns.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-columns, status: resolved, definition: '@component-definition#/groups/2/components/2'}
+      - id: block-content-fragment-3fd3a6d7
+        type: block
+        path: blocks/content-fragment/
+        name: content-fragment
+        files:
+          configuration: [blocks/content-fragment/_content-fragment.json]
+          style: [blocks/content-fragment/content-fragment.css]
+          implementation: [blocks/content-fragment/content-fragment.js]
+        status: partial
+        entryPoints: [blocks/content-fragment/content-fragment.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-contentfragment, status: resolved, definition: '@component-definition#/groups/2/components/7', modelId: contentfragment, model: '@component-models#/9'}
+        dependencies:
+          internal:
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/content-fragment/content-fragment.js]}
+          - {path: scripts/scripts.js, resolution: resolved, relation: import, need: required, evidence: [blocks/content-fragment/content-fragment.js]}
+          - {path: scripts/utils.js, resolution: resolved, relation: import, need: required, evidence: [blocks/content-fragment/content-fragment.js]}
+      - id: block-dynamicmedia-image-7bb12bcd
+        type: block
+        path: blocks/dynamicmedia-image/
+        name: dynamicmedia-image
+        files:
+          configuration: [blocks/dynamicmedia-image/_dynamicmedia-image.json]
+          style: [blocks/dynamicmedia-image/dynamicmedia-image.css]
+          implementation: [blocks/dynamicmedia-image/dynamicmedia-image.js]
+        status: partial
+        entryPoints: [blocks/dynamicmedia-image/dynamicmedia-image.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-dm-asset, status: resolved, definition: '@component-definition#/groups/2/components/9', modelId: dm-asset, model: '@component-models#/11'}
+      - id: block-dynamicmedia-template-8b675b61
+        type: block
+        path: blocks/dynamicmedia-template/
+        name: dynamicmedia-template
+        files:
+          style: [blocks/dynamicmedia-template/dynamicmedia-template.css]
+          implementation: [blocks/dynamicmedia-template/dynamicmedia-template.js]
+          configuration: [blocks/dynamicmedia-template/dynamicmedia-template.json]
+        status: partial
+        entryPoints: [blocks/dynamicmedia-template/dynamicmedia-template.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-dm-template, status: resolved, definition: '@component-definition#/groups/2/components/10', modelId: dm-template, model: '@component-models#/17'}
+        dependencies:
+          internal:
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/dynamicmedia-template/dynamicmedia-template.js]}
+          - {path: scripts/scripts.js, resolution: resolved, relation: import, need: required, evidence: [blocks/dynamicmedia-template/dynamicmedia-template.js]}
+          - {path: scripts/utils.js, resolution: resolved, relation: import, need: required, evidence: [blocks/dynamicmedia-template/dynamicmedia-template.js]}
+      - id: block-embed-adaptive-form-1f8413ee
+        type: block
+        path: blocks/embed-adaptive-form/
+        name: embed-adaptive-form
+        files:
+          configuration: [blocks/embed-adaptive-form/_embed-adaptive-form.json]
+          style: [blocks/embed-adaptive-form/embed-adaptive-form.css]
+          implementation: [blocks/embed-adaptive-form/embed-adaptive-form.js]
+        status: partial
+        entryPoints: [blocks/embed-adaptive-form/embed-adaptive-form.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-embed-adaptive-form, status: resolved, definition: '@component-definition#/groups/2/components/18', modelId: embed-adaptive-form,
+            model: '@component-models#/19'}
+        dependencies:
+          internal:
+          - {path: blocks/fragment/fragment.js, resolution: resolved, relation: import, need: required, evidence: [blocks/embed-adaptive-form/embed-adaptive-form.js],
+            assetRef: {projectId: wknd-eds, assetId: block-fragment-f49668ca}}
+      - id: block-find-a-doctor-d7e64843
+        type: block
+        path: blocks/find-a-doctor/
+        name: find-a-doctor
+        files:
+          configuration: [blocks/find-a-doctor/_find-a-doctor.json]
+          style: [blocks/find-a-doctor/find-a-doctor.css]
+          implementation: [blocks/find-a-doctor/find-a-doctor.js]
+        status: partial
+        entryPoints: [blocks/find-a-doctor/find-a-doctor.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-find-a-doctor, status: resolved, definition: '@component-definition#/groups/2/components/15', modelId: find-a-doctor, model: '@component-models#/50'}
+        dependencies:
+          internal:
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/find-a-doctor/find-a-doctor.js]}
+          - {path: scripts/scripts.js, resolution: resolved, relation: import, need: required, evidence: [blocks/find-a-doctor/find-a-doctor.js]}
+          - {path: scripts/utils.js, resolution: resolved, relation: import, need: required, evidence: [blocks/find-a-doctor/find-a-doctor.js]}
+      - id: block-footer-b1e69e61
+        type: block
+        path: blocks/footer/
+        name: footer
+        files:
+          style: [blocks/footer/footer.css]
+          implementation: [blocks/footer/footer.js]
+        status: partial
+        entryPoints: [blocks/footer/footer.js]
+        authoring: {status: unknown}
+        dependencies:
+          internal:
+          - {path: blocks/fragment/fragment.js, resolution: resolved, relation: import, need: required, evidence: [blocks/footer/footer.js], assetRef: {
+              projectId: wknd-eds, assetId: block-fragment-f49668ca}}
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/footer/footer.js]}
+          - {path: scripts/scripts.js, resolution: resolved, relation: import, need: required, evidence: [blocks/footer/footer.js]}
+          - {path: scripts/utils.js, resolution: resolved, relation: import, need: required, evidence: [blocks/footer/footer.js]}
+      - id: block-forex-48dcd73b
+        type: block
+        path: blocks/forex/
+        name: forex
+        files:
+          configuration: [blocks/forex/_forex.json]
+          style: [blocks/forex/forex.css]
+          implementation: [blocks/forex/forex.js]
+        status: partial
+        entryPoints: [blocks/forex/forex.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-forex, status: resolved, definition: '@component-definition#/groups/4/components/0', modelId: forex, model: '@component-models#/47'}
+      - id: block-form-e916b84a
+        type: block
+        path: blocks/form/
+        name: form
+        files:
+          configuration: [blocks/form/_form.json, blocks/form/components/accordion/_accordion.json, blocks/form/components/modal/_modal.json,
+            blocks/form/components/password/_password.json, blocks/form/components/range/_range.json, blocks/form/components/rating/_rating.json,
+            blocks/form/components/tnc/_tnc.json, blocks/form/components/wizard/_wizard.json, blocks/form/models/form-common/_basic-fields.json,
+            blocks/form/models/form-common/_basic-input-default-value-fields.json, blocks/form/models/form-common/_basic-input-fields.json, blocks/form/models/form-common/_basic-input-placeholder-fields.json,
+            blocks/form/models/form-common/_basic-select-fields.json, blocks/form/models/form-common/_basic-validation-fields.json, blocks/form/models/form-common/_date-validation-fields.json,
+            blocks/form/models/form-common/_help-container.json, blocks/form/models/form-common/_number-validation-fields.json, blocks/form/models/form-common/_script-validation-fields.json,
+            blocks/form/models/form-common/_string-validation-fields.json, blocks/form/models/form-components/_button.json, blocks/form/models/form-components/_checkbox-group.json,
+            blocks/form/models/form-components/_checkbox.json, blocks/form/models/form-components/_date-input.json, blocks/form/models/form-components/_drop-down.json,
+            blocks/form/models/form-components/_email.json, blocks/form/models/form-components/_file-input.json, blocks/form/models/form-components/_fragment.json,
+            blocks/form/models/form-components/_image.json, blocks/form/models/form-components/_multiline-input.json, blocks/form/models/form-components/_number-input.json,
+            blocks/form/models/form-components/_panel.json, blocks/form/models/form-components/_radio-group.json, blocks/form/models/form-components/_recaptcha.json,
+            blocks/form/models/form-components/_reset-button.json, blocks/form/models/form-components/_submit-button.json, blocks/form/models/form-components/_telephone-input.json,
+            blocks/form/models/form-components/_text-input.json, blocks/form/models/form-components/_text.json]
+          style: [blocks/form/components/accordion/accordion.css, blocks/form/components/modal/modal.css, blocks/form/components/password/password.css,
+            blocks/form/components/range/range.css, blocks/form/components/rating/rating.css, blocks/form/components/tnc/tnc.css, blocks/form/form.css]
+          implementation: [blocks/form/components/accordion/accordion.js, blocks/form/components/file/file.js, blocks/form/components/modal/modal.js,
+            blocks/form/components/password/password.js, blocks/form/components/range/range.js, blocks/form/components/rating/rating.js, blocks/form/components/repeat/repeat.js,
+            blocks/form/components/tnc/tnc.js, blocks/form/components/toggleable-link/toggleable-link.js, blocks/form/components/wizard/wizard.js,
+            blocks/form/constant.js, blocks/form/form.js, blocks/form/functions.js, blocks/form/integrations/recaptcha.js, blocks/form/mappings.js,
+            blocks/form/rules-doc/RuleCompiler.js, blocks/form/rules-doc/RuleEngine.js, blocks/form/rules-doc/index.js, blocks/form/rules-doc/parser/Formula.js,
+            blocks/form/rules-doc/parser/Lexer.js, blocks/form/rules-doc/parser/Parser.js, blocks/form/rules-doc/parser/Runtime.js, blocks/form/rules-doc/parser/Tokens.js,
+            blocks/form/rules-doc/parser/TreeInterpreter.js, blocks/form/rules-doc/parser/functions.js, blocks/form/rules-doc/parser/utils.js,
+            blocks/form/rules/RuleEngineWorker.js, blocks/form/rules/formula/index.js, blocks/form/rules/formula/index.min.js, blocks/form/rules/functionRegistration.js,
+            blocks/form/rules/functions.js, blocks/form/rules/index.js, blocks/form/rules/model/afb-events.js, blocks/form/rules/model/afb-events.min.js,
+            blocks/form/rules/model/afb-formatters.js, blocks/form/rules/model/afb-formatters.min.js, blocks/form/rules/model/afb-runtime.js,
+            blocks/form/rules/model/afb-runtime.min.js, blocks/form/submit.js, blocks/form/transform.js, blocks/form/util.js]
+        status: partial
+        entryPoints: [blocks/form/form.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-form, status: resolved, definition: '@component-definition#/groups/2/components/19'}
+          - {id: ue-form-2, status: resolved, definition: '@component-definition#/groups/2/components/45'}
+          - {id: ue-form-3, status: resolved, definition: '@component-definition#/groups/2/components/45'}
+          - {id: ue-form-4, status: resolved, definition: '@component-definition#/groups/2/components/45'}
+          - {id: ue-form-5, status: resolved, definition: '@component-definition#/groups/2/components/45'}
+          - {id: ue-form-6, status: resolved, definition: '@component-definition#/groups/2/components/45'}
+          - {id: ue-form-7, status: resolved, definition: '@component-definition#/groups/2/components/45'}
+          - {id: ue-form-8, status: resolved, definition: '@component-definition#/groups/2/components/45'}
+        dependencies:
+          internal:
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/form/components/modal/modal.js, blocks/form/form.js,
+              blocks/form/mappings.js, blocks/form/rules/index.js]}
+      - id: block-fragment-f49668ca
+        type: block
+        path: blocks/fragment/
+        name: fragment
+        files:
+          configuration: [blocks/fragment/_fragment.json]
+          style: [blocks/fragment/fragment.css]
+          implementation: [blocks/fragment/fragment.js]
+        status: partial
+        entryPoints: [blocks/fragment/fragment.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-fragment, status: resolved, definition: '@component-definition#/groups/2/components/4', modelId: fragment, model: '@component-models#/7'}
+        dependencies:
+          internal:
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/fragment/fragment.js]}
+          - {path: scripts/scripts.js, resolution: resolved, relation: import, need: required, evidence: [blocks/fragment/fragment.js]}
+      - id: block-header-300c06c2
+        type: block
+        path: blocks/header/
+        name: header
+        files:
+          implementation: [blocks/header/constants.js, blocks/header/header.js, blocks/header/navigation.js]
+          style: [blocks/header/header.css]
+        status: partial
+        entryPoints: [blocks/header/header.js]
+        authoring: {status: unknown}
+        dependencies:
+          internal:
+          - {path: blocks/fragment/fragment.js, resolution: resolved, relation: import, need: required, evidence: [blocks/header/header.js], assetRef: {
+              projectId: wknd-eds, assetId: block-fragment-f49668ca}}
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/header/header.js]}
+          - {path: scripts/dom-helpers.js, resolution: resolved, relation: import, need: required, evidence: [blocks/header/header.js, blocks/header/navigation.js]}
+          - {path: scripts/scripts.js, resolution: resolved, relation: import, need: required, evidence: [blocks/header/header.js]}
+          - {path: scripts/utils.js, resolution: resolved, relation: import, need: required, evidence: [blocks/header/header.js]}
+      - id: block-hero-f7906b20
+        type: block
+        path: blocks/hero/
+        name: hero
+        files:
+          configuration: [blocks/hero/_hero.json]
+          style: [blocks/hero/hero.css]
+          implementation: [blocks/hero/hero.js]
+        status: partial
+        entryPoints: [blocks/hero/hero.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-hero, status: resolved, definition: '@component-definition#/groups/2/components/8', modelId: hero, model: '@component-models#/10'}
+        dependencies:
+          internal:
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/hero/hero.js]}
+          - {path: scripts/scripts.js, resolution: resolved, relation: import, need: required, evidence: [blocks/hero/hero.js]}
+      - id: block-iframe-a605208b
+        type: block
+        path: blocks/iframe/
+        name: iframe
+        files:
+          configuration: [blocks/iframe/_iframe.json]
+          style: [blocks/iframe/iframe.css]
+          implementation: [blocks/iframe/iframe.js]
+        status: partial
+        entryPoints: [blocks/iframe/iframe.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-iframe, status: resolved, definition: '@component-definition#/groups/2/components/17', modelId: iframe, model: '@component-models#/16'}
+      - id: block-search-b8938052
+        type: block
+        path: blocks/search/
+        name: search
+        files:
+          configuration: [blocks/search/_search.json]
+          style: [blocks/search/search.css]
+          implementation: [blocks/search/search.js]
+        status: partial
+        entryPoints: [blocks/search/search.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-search, status: resolved, definition: '@component-definition#/groups/2/components/11', modelId: search, model: '@component-models#/12'}
+        dependencies:
+          internal:
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/search/search.js]}
+          - {path: scripts/placeholders.js, resolution: resolved, relation: import, need: required, evidence: [blocks/search/search.js]}
+          - {path: scripts/utils.js, resolution: resolved, relation: import, need: required, evidence: [blocks/search/search.js]}
+      - id: block-separator-7312aee2
+        type: block
+        path: blocks/separator/
+        name: separator
+        files:
+          style: [blocks/separator/separator.css]
+          implementation: [blocks/separator/separator.js]
+        status: partial
+        entryPoints: [blocks/separator/separator.js]
+        authoring: {status: unknown}
+      - id: block-teaser-b316e086
+        type: block
+        path: blocks/teaser/
+        name: teaser
+        files:
+          configuration: [blocks/teaser/_teaser.json]
+          style: [blocks/teaser/teaser.css]
+          implementation: [blocks/teaser/teaser.js]
+        status: partial
+        entryPoints: [blocks/teaser/teaser.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-teaser, status: resolved, definition: '@component-definition#/groups/2/components/13', modelId: teaser, model: '@component-models#/18'}
+        dependencies:
+          internal:
+          - {path: scripts/aem.js, resolution: resolved, relation: import, need: required, evidence: [blocks/teaser/teaser.js]}
+          - {path: scripts/dom-helpers.js, resolution: resolved, relation: import, need: required, evidence: [blocks/teaser/teaser.js]}
+      - id: block-video-f0917435
+        type: block
+        path: blocks/video/
+        name: video
+        files:
+          configuration: [blocks/video/_video.json]
+          style: [blocks/video/video.css]
+          implementation: [blocks/video/video.js]
+        status: partial
+        entryPoints: [blocks/video/video.js]
+        authoring:
+          status: known
+          bindings:
+          - {id: ue-video, status: resolved, definition: '@component-definition#/groups/2/components/14', modelId: video, model: '@component-models#/14'}
+      notes: [target-validation-not-run, variants-not-enumerated, dependencies-static-imports-only]
